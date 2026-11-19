@@ -13,16 +13,36 @@ import { site, emailLink } from '../data/site';
       </picture></span
     >
   </h1>
-  <p>I’m a Lead Product Designer based in Madrid.</p>
-  <p>
-    I make complex B2B software easier to use, combining hands-on design with team leadership and an
-    engineering background. I lead work from discovery through delivery, staying close to the
-    details that make a product work.
-  </p>
-  <ContactButton href={emailLink('Hello Eduard!')} primary>Get in touch</ContactButton>
+  <div class="intro-details">
+    <p>I’m a Lead Product Designer based in Madrid.</p>
+    <p>
+      I make complex B2B software easier to use, combining hands-on design with team leadership and
+      an engineering background. I lead work from discovery through delivery, staying close to the
+      details that make a product work.
+    </p>
+    <ContactButton href={emailLink('Hello Eduard!')} primary>Get in touch</ContactButton>
+  </div>
 </section>
+<script is:inline>
+  if (
+    window.matchMedia('(prefers-reduced-motion: no-preference)').matches &&
+    window.scrollY === 0
+  ) {
+    const title = document.getElementById('intro-title');
+    const content = title?.closest('.page-content');
+    if (title && content) {
+      const bounds = title.getBoundingClientRect();
+      content.style.setProperty(
+        '--intro-offset',
+        `${(window.innerHeight - bounds.height) / 2 - bounds.top}px`
+      );
+      document.documentElement.classList.add('intro-animate');
+    }
+  }
+</script>
 <style>
-  .intro {
+  .intro,
+  .intro-details {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -49,6 +69,46 @@ import { site, emailLink } from '../data/site';
   }
   picture img {
     max-width: none;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.intro-animate) h1 {
+      animation: title-appear 350ms ease-out both;
+    }
+    :global(.intro-animate) picture {
+      animation: draw-underline 750ms ease-out 500ms both;
+    }
+    :global(.intro-animate) .intro-details {
+      animation: details-appear 500ms ease-out 1300ms both;
+    }
+    :global(.intro-animate) .intro:focus-within h1,
+    :global(.intro-animate) .intro:focus-within picture,
+    :global(.intro-animate) .intro:focus-within .intro-details {
+      animation: none;
+    }
+  }
+  @keyframes title-appear {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes details-appear {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes draw-underline {
+    from {
+      clip-path: inset(-20% 100% -20% -20%);
+    }
+    to {
+      clip-path: inset(-20% -20% -20% -20%);
+    }
   }
   p {
     font-size: 21px;
