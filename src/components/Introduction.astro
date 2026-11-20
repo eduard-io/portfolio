@@ -77,12 +77,21 @@ import { site, emailLink } from '../data/site';
     :global(.intro-animate) picture {
       animation: draw-underline 750ms ease-out 500ms both;
     }
-    :global(.intro-animate) .intro-details {
-      animation: details-appear 500ms ease-out 1300ms both;
+    :global(.intro-animate) .intro-details > :global(*) {
+      animation: details-appear 450ms ease-out both;
+    }
+    :global(.intro-animate) .intro-details > :global(*:nth-child(1)) {
+      animation-delay: 1300ms;
+    }
+    :global(.intro-animate) .intro-details > :global(*:nth-child(2)) {
+      animation-delay: 1390ms;
+    }
+    :global(.intro-animate) .intro-details > :global(*:nth-child(3)) {
+      animation-delay: 1480ms;
     }
     :global(.intro-animate) .intro:focus-within h1,
     :global(.intro-animate) .intro:focus-within picture,
-    :global(.intro-animate) .intro:focus-within .intro-details {
+    :global(.intro-animate) .intro:focus-within .intro-details > :global(*) {
       animation: none;
     }
   }

@@ -33,12 +33,22 @@ import SiteFooter from '../components/SiteFooter.astro';
       animation: content-move 600ms ease-in-out 1300ms both;
     }
 
-    :global(.intro-animate) .remaining-content,
+    :global(.intro-animate) .remaining-content > :global(*),
     :global(.intro-animate) .footer-reveal {
-      animation: fade-in 500ms ease-out 1300ms both;
+      animation: fade-in 450ms ease-out both;
     }
 
-    :global(.intro-animate) .remaining-content:focus-within,
+    :global(.intro-animate) .remaining-content > :global(*:nth-child(1)) {
+      animation-delay: 1570ms;
+    }
+    :global(.intro-animate) .remaining-content > :global(*:nth-child(2)) {
+      animation-delay: 1660ms;
+    }
+    :global(.intro-animate) .footer-reveal {
+      animation-delay: 1750ms;
+    }
+
+    :global(.intro-animate) .remaining-content > :global(*:focus-within),
     :global(.intro-animate) .footer-reveal:focus-within,
     :global(.intro-animate) .page-content:focus-within {
       animation: none;
